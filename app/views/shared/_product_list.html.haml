@@ -1,15 +1,13 @@
-%ul.small-block-grid-2
-  - for product in products.includes(:default_image, :product_category)
-    %li
+- for product in products.includes(:default_image, :product_category)
+  .col-md-6
+    .row
+      .col-md-3
+        = image_tag product.default_image.path, width: '100px'
+      .col-md-9
+        %h4= link_to product.name, product_path(product.product_category.permalink, product.permalink)
+        %p.info= truncate product.short_description, :length => 90
+        %h5= number_to_currency product.price
+    - if product.orderable?
       .row
-        .large-3.columns
-          = image_tag product.default_image.path
-        .large-9.columns
-          %h4= link_to product.name, product_path(product.product_category.permalink, product.permalink)
-          %p.info= truncate product.short_description, :length => 90
-      .row
-        .large-4.columns
-          = number_to_currency product.price
-        .large-8.columns
-          - if product.orderable?
-            = link_to "Add to Basket", buy_product_path(product.product_category.permalink, product.permalink), class: 'add tiny button success right', method: :post
+        .col-md-8.offset-by-4
+          = link_to "Add to Basket", buy_product_path(product.product_category.permalink, product.permalink), class: 'add btn btn-info pull-right', method: :post

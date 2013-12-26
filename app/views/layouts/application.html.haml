@@ -58,9 +58,9 @@
         .page-header
           %h1= @page_title
       .page-content.row
-        .col-md-8
+        .col-md-9
           = yield
-        .col-md-4.columns
+        .col-md-3
           - if content_for?(:sidebar)
             = yield :sidebar
           - else

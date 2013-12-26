@@ -1,12 +1,15 @@
-.panel.callout.radius
-  - if has_order? && current_order.has_items?
-    %p <b>#{pluralize current_order.total_items, 'item'}</b> in your basket.
-    %p <b>#{number_to_currency current_order.total_before_tax}</b> (ex. tax &amp; delivery)
-    %hr
-    .row
-      .large-6.columns
-        = link_to "View my bag", basket_path
-      .large-6.columns
-        = link_to "Checkout", checkout_path, class: 'checkout'
-  - else
-    %p <b>Your shopping bag is empty.</b>
+.panel.panel-warning
+  .panel-heading
+    %strong Shopping Basket
+  .panel-body
+    - if has_order? && current_order.has_items?
+      %p <b>#{pluralize current_order.total_items, 'item'}</b> in your basket.
+      %p <b>#{number_to_currency current_order.total_before_tax}</b> (ex. tax)
+      %hr
+      .row
+        .col-md-6
+          = link_to "View Basket", basket_path
+        .col-md-6
+          = link_to "Checkout", checkout_path, class: 'checkout'
+    - else
+      %p Your shopping basket is currently empty.
