@@ -4,8 +4,10 @@
     = link_to "View Basket", basket_path, class: 'btn btn-xs btn-default pull-right'
   .panel-body
     - if has_order? && current_order.has_items?
-      %p <b>#{pluralize current_order.total_items, 'item'}</b> in your basket.
-      %p <b>#{number_to_currency current_order.total_before_tax}</b> (ex. tax)
+      %p 
+        %strong
+          #{pluralize current_order.total_items, 'item'}</b> =
+        #{number_to_currency current_order.total_before_tax}</b> (exc. tax)
       .row
         .col-md-12
           = link_to "Checkout", checkout_path, class: 'checkout btn btn-warning btn-block'
