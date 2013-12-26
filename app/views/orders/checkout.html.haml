@@ -1,0 +1,80 @@
+- @page_title = 'Checkout'
+= render 'checkout_sidebar'
+    
+.checkout
+  %p.right Secure connection
+  %h2 Place your order
+  %hr
+  %p
+    Fantastic! You're ready to place your order, just follow the instructions below and
+    we'll get your products shipped to you as quickly as we can.
+
+  %h3 Review the products in your shopping bag
+  = render 'shared/order_items', :order => @order
+
+  - unless @order.delivery_required? && @order.delivery_service.nil?
+    %hr
+    %h3 Complete your details below to complete your order
+    = form_for @order, :url => checkout_path, :html => {:class => 'checkout disableable'} do |f|
+      = f.error_messages
+      .row
+        .large-12.columns
+          = field_set_tag do
+            .row
+              .large-3.columns
+                = f.label :first_name, "First Name", :class => 'req'
+                = f.text_field :first_name, :placeholder => 'First Name'
+              .large-3.columns
+                = f.label :last_name, "Surname", :class => 'req'
+                = f.text_field :last_name, :placeholder => 'Last Name'
+              .large-6.columns
+                = f.label :company, "Company Name (optional)"
+                = f.text_field :company
+            .row
+              .large-6.columns
+                = f.label :email_address, 'Your E-Mail Address', :class => 'req'
+                = f.text_field :email_address
+              .large-6.columns
+                = f.label :phone_number, 'Contact Phone Number', :class => 'req'
+                = f.text_field :phone_number
+      %hr
+      .row
+        .large-12.columns
+          = field_set_tag do
+            %h3 Billing Address
+            .row
+              .large-6.columns
+                = f.text_field :billing_address1, :placeholder => "Line 1"
+              .large-3.columns
+                = f.text_field :billing_address3, :placeholder => "Town/City"
+              .large-3.columns
+                = f.text_field :billing_address4, :placeholder => "County"
+            .row
+              .large-4.columns
+                = f.text_field :billing_postcode, :placeholder => "Postcode", :class => 'postcode'
+              .large-8.columns
+                = f.collection_select :billing_country_id, Shoppe::Country.ordered, :id, :name
+            .row
+              .large-12.columns
+                = f.check_box :separate_delivery_address
+                = f.label :separate_delivery_address, "Deliver to a different address?"
+            .delivery
+              %hr
+              %h3 Delivery Address
+              .row
+                .large-6.columns
+                  = f.text_field :delivery_address1, :placeholder => "Line 1"
+                .large-3.columns
+                  = f.text_field :delivery_address3, :placeholder => "Town/City"
+                .large-3.columns
+                  = f.text_field :delivery_address4, :placeholder => "County"
+              .row
+                .large-4.columns
+                  = f.text_field :delivery_postcode, :placeholder => "Postcode", :class => 'postcode'
+                .large-8.columns
+                  = f.collection_select :delivery_country_id, Shoppe::Country.ordered, :id, :name
+
+      %hr
+      = f.submit "Continue to payment", class: 'success button right'
+  - else
+    %p Please call us to place this order.

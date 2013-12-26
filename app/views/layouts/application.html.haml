@@ -1,0 +1,95 @@
+!!!
+%html
+  %head
+    %title #{@page_title} - #{Shoppe.settings.store_name}
+    %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}
+    = stylesheet_link_tag :application
+    = javascript_include_tag "vendor/modernizr"
+    = csrf_meta_tags
+    = yield :head
+  %body
+    .demo
+      .row
+        .large-8.columns
+          .inner
+            %p This is a demo store built with #{link_to 'Shoppe', 'http://tryshoppe.com'} - an open source e-commerce platform for Rails.
+        .large-4.columns
+          = link_to "Play with Shoppe Admin", "/shoppe", class: 'tiny button secondary right', style: 'margin-left: 5px;'
+          = link_to "Browse the code", "http://github.com/tryshoppe/core", class: 'tiny button secondary right'
+    .contain-to-grid
+      %nav.top-bar{"data-topbar" => ""}
+        %ul.title-area
+          %li.name
+            %h1= link_to Shoppe.settings.store_name, root_path
+          %li.toggle-topbar.menu-icon
+            %a{href: "#"}
+              %span Menu
+        %section.top-bar-section
+          %ul.left
+            %li.divider
+            %li= link_to "Home", root_path, :nav_item => :home
+            %li.divider
+            %li.has-dropdown.not-click
+              = link_to "Our catalogue", catalogue_path, :nav_item => :catalogue, :class => 'noborder'
+              %ul.dropdown
+                - for category in Shoppe::ProductCategory.ordered
+                  %li= link_to category.name, products_path(category.permalink)
+            %li.divider
+            %li= link_to "Why shop with us?", page_path(:why), :nav_item => :why
+            %li.divider
+            %li= link_to "FAQs", page_path(:faqs), :nav_item => :faqs
+            %li.divider
+          %ul.right
+            %li.has-form.show-for-large-up= link_to "Get in touch", page_path(:contact), class: 'button', :nav_item => :contact
+    .container
+      = display_flash
+      - if @full_header
+        .home-canvas
+          .row
+            .large-9.columns
+              %h1 
+                Welcome to our 
+                %em shoppe
+              %p Check out our lovely products on this page and then you can buy them through the website with just a few clicks using our supremely simple ordering system.
+            .large-3.columns
+              %img{src: 'http://placehold.it/200x150&text=[foreground img]'}
+        .home-bar
+          .row
+            .large-6.columns
+              %p Call us today on <b>01202 901 101</b> if you have any questions.
+            .large-6.columns
+              %p.right <b>This week only!</b> FREE next day shipping on all orders over &pound;30.
+      .content
+        .row
+          .large-8.columns
+            = yield
+          .large-4.columns
+            - if content_for?(:sidebar)
+              = yield :sidebar
+            - else
+              = render 'shared/basket'
+              = render 'shared/reasons'
+    %footer.row
+      .large-12.columns
+        .row.footer
+          .large-3.columns
+            %ul
+              %li= link_to "Terms & Conditions", page_path(:terms)
+              %li= link_to "Privacy policy", page_path(:privacy)
+              %li= link_to "Returns policy", page_path(:returns)
+              %li= link_to "Frequently asked questions", page_path(:faqs)
+              %li= link_to "Cookie policy", page_path(:cookies)
+          .large-4.columns
+            %p Got any questions? Call us today:
+            %p.number 01202 901 101
+            %p We're open 9am to 5pm, Monday to Friday.
+          .large-5.columns
+            .copyright
+              %p &copy; #{Date.today.year} Shoppe. All Rights Reserved.
+              %p All third party logos &amp; product images &copy; their respective owners.
+              %p
+                Shoppe is a trading name of Niftyware Limited.<br />
+                Company registration number: 8514362.<br />
+                VAT registration number: GB 123 123 123.
+
+    = javascript_include_tag :application
