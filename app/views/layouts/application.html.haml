@@ -27,7 +27,7 @@
           = link_to Shoppe.settings.store_name, root_path, class: 'navbar-brand'
         .navbar-collapse.collapse
           %ul.nav.navbar-nav
-            %li.active
+            %li
               = link_to "Home", root_path, :nav_item => :home
             %li.dropdown
               = link_to catalogue_path, :nav_item => :catalogue, :class => 'dropdown-toggle', "data-toggle" => "dropdown" do
