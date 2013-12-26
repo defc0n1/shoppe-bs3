@@ -124,6 +124,8 @@ class OrdersController < ApplicationController
     end
   end
 
+  #TODO: All of below
+
   def create_payment_in_xero
     payment = @client.Payment.build invoice: {id: @invoice.id},
                                     account: {code: 100},
