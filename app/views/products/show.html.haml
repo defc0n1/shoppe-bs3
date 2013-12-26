@@ -15,7 +15,11 @@
                 %span.label.label-info In stock
               - else
                 %span.label.label-warning Out of stock
-            %p= number_to_currency variant.price
+            %h4
+              = number_to_currency variant.price
+              %small
+                %br
+                %em (exc. tax)
           = form_tag buy_product_path(@product.product_category.permalink, @product.permalink, :variant => variant.id), :class => (variant.in_stock? ? 'in-stock' : 'no-stock') do
             .col-md-3
               = text_field_tag 'quantity', '1', :disabled => !variant.in_stock?, class: 'form-control', style: 'margin-bottom: 10px; margin-top: 10px;'
