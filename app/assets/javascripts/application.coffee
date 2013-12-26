@@ -1,6 +1,6 @@
 #= require jquery
 #= require jquery_ujs
-#= require foundation
+#= require bootstrap
 #= require shoppe/stripe/form_handler
 
 $ ->
