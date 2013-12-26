@@ -1,3 +1,9 @@
+.panel.panel-warning
+  .panel-heading
+    %strong Questions?
+  .panel-body
+    %p Call us between 9am and 5pm (GMT) on 03300 881002 to discuss.
+    = mail_to Shoppe.settings.email_address, "or send us an email", :subject => "Question about the #{@product.name}", class: 'btn btn-default btn-block'
 .panel.panel-success
   .panel-heading
     %strong Reasons To Shop With Us

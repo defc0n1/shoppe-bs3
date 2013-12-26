@@ -2,71 +2,65 @@
 - @page_title = @product.name + " - " + @product.product_category.name
 
 .row
-  .large-7.columns
-    %h2= @product.name
-    %p.intro= @product.short_description
-  .large-5.columns
-    - if @product.default_image
-      = image_tag @product.default_image.path
-
-- if @product.has_variants?
-  .row
-    .large-12.columns
-      %table.variants
-        - for variant in @product.variants
-          %tr
-            %td
+  .col-md-6
+    %p= @product.short_description
+    %hr
+    - if @product.has_variants?
+      - for variant in @product.variants
+        .row
+          .col-md-4
+            %h4
+              = variant.name
               - if variant.in_stock?
-                %p.stock.yes In stock
+                %span.label.label-info In stock
               - else
-                %p.stock.no Out of stock
-              %h4= variant.name
-              %p.price= number_to_currency variant.price
-            %td.buy
-              = form_tag buy_product_path(@product.product_category.permalink, @product.permalink, :variant => variant.id), :class => (variant.in_stock? ? 'in-stock' : 'no-stock') do
-                %p
-                  = select_tag 'quantity', options_for_select([1,2,3,4,5,6,7,8,9]), :disabled => !variant.in_stock?
-                  = submit_tag 'Add Product to Basket', class: 'button success', :disabled => !variant.in_stock?
-- else
-  %p= number_to_currency @product.price
-  %hr
-  - if @product.in_stock?
-    .alert-box.info.radius
-      %p Product In Stock! - Order in the next <b>#{time_until_next_delivery_cut_off}</b> for delivery #{next_delivery_day}.
-  - else
-    .alert-box.warning.radius
-      %p This product is currently out of stock. #{link_to "Let me know when you do"}.
-
-  = form_tag buy_product_path(@product.product_category.permalink, @product.permalink), :class => (@product.in_stock? ? 'in-stock' : 'no-stock') do
-    .row
-      .large-3.columns
-        %label{style: 'margin-bottom:5px;'} Quantity
-        = select_tag 'quantity', options_for_select([1,2,3,4,5,6,7,8,9]), :disabled => !@product.in_stock?
-      .large-4.columns.end
-        = submit_tag 'Add Product to Basket', class: 'button success', :disabled => !@product.in_stock?
-  
-
-  .links
-    %ul
-      - if @product.data_sheet
-        %li.item.datasheet= link_to "Read product datasheet", @product.data_sheet.path
-      - unless @product.in_the_box.blank?
+                %span.label.label-warning Out of stock
+            %p= number_to_currency variant.price
+          = form_tag buy_product_path(@product.product_category.permalink, @product.permalink, :variant => variant.id), :class => (variant.in_stock? ? 'in-stock' : 'no-stock') do
+            .col-md-3
+              = text_field_tag 'quantity', '1', :disabled => !variant.in_stock?, class: 'form-control', style: 'margin-bottom: 10px; margin-top: 10px;'
+            .col-md-5
+              = submit_tag 'Add To Basket', class: 'btn btn-success btn-lg btn-block', :disabled => !variant.in_stock?, style: 'margin-top: 10px;'
         %hr
-        %h3 What's in the box?
-        = markdown @product.in_the_box
-      %li.item.ask= mail_to Shoppe.settings.email_address, "Ask us a question about this", :subject => "Question about the #{@product.name}"
+    - else
+      %p= number_to_currency @product.price
+      %hr
+      - if @product.in_stock?
+        .alert.alert-success
+          %p Product In Stock! - Order in the next <b>#{time_until_next_delivery_cut_off}</b> for delivery #{next_delivery_day}.
+      - else
+        .alert.alert-warning
+          %p This product is currently out of stock. #{link_to "Let me know when you do"}.
+
+      = form_tag buy_product_path(@product.product_category.permalink, @product.permalink), :class => (@product.in_stock? ? 'in-stock' : 'no-stock') do
+        .row
+          .col-md-3
+            = text_field_tag 'quantity', '1', :disabled => !@product.in_stock?, class: 'form-control', style: 'margin-bottom: 10px; margin-top: 10px;'
+          .col-md-5
+            = submit_tag 'Add To Basket', class: 'btn btn-success btn-lg btn-block', :disabled => !@product.in_stock?, style: 'margin-top: 10px;'
+
+
+    - if @product.data_sheet
+      %li.item.datasheet= link_to "Read product datasheet", @product.data_sheet.path
+    - unless @product.in_the_box.blank?
+      %h3 What's in the box?
+      = markdown @product.in_the_box
+  .col-md-6
+    - if @product.default_image
+      = image_tag @product.default_image.path, class: 'pull-right', style: 'width: 100%;'
 
 
 .row
-  .large-12.columns
+  .col-md-12
     %hr
     - unless @attributes.empty?
-      %table
+      %h3 Product Attributes
+      %table.table.table-bordered.table-condensed
         - for attribute in @attributes
           %tr
             %th= attribute.key
             %td= link_to attribute.value, product_filter_path(:key => attribute.key, :value => attribute.value)
-    .description
-      = markdown @product.description
+    %h5 Full Description
+    = markdown @product.description
     
   

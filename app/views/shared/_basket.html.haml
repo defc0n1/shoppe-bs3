@@ -1,15 +1,13 @@
-.panel.panel-warning
+.panel.panel-primary
   .panel-heading
     %strong Shopping Basket
+    = link_to "View Basket", basket_path, class: 'btn btn-xs btn-default pull-right'
   .panel-body
     - if has_order? && current_order.has_items?
       %p <b>#{pluralize current_order.total_items, 'item'}</b> in your basket.
       %p <b>#{number_to_currency current_order.total_before_tax}</b> (ex. tax)
-      %hr
       .row
-        .col-md-6
-          = link_to "View Basket", basket_path
-        .col-md-6
-          = link_to "Checkout", checkout_path, class: 'checkout'
+        .col-md-12
+          = link_to "Checkout", checkout_path, class: 'checkout btn btn-warning btn-block'
     - else
       %p Your shopping basket is currently empty.

@@ -1,12 +1,11 @@
 - active_nav_item :catalogue
 - @page_title = @product_category.name
 .row
-  .large-12.columns
-    %h2= @product_category.name
+  .col-md-12
     - unless @product_category.description.blank?
-      %p.intro= @product_category.description
+      %p= @product_category.description
     - if @products.empty?
-      .alert-box.info.radius There are no products in this category
+      .alert.alert-danger There are no products in this category
     - else
       %hr
       = render 'shared/product_list', :products => @products
