@@ -36,8 +36,10 @@
 		}
 	}
 }
+.navbar {
+	margin-bottom: 0px;
+}
 .jumbotron {
-	margin-top: 50px;
 	margin-bottom: 0px;
 	background: url("header.jpg") no-repeat scroll center center rgba(0, 0, 0, 0); 
 	color: #ffffff;
@@ -47,9 +49,6 @@
 	color: #ffffff;
 	padding: 20px 20px 10px 20px;
 	margin-bottom: 15px;
-}
-.page-header {
-	margin-top: 70px;
 }
 .errorExplanation {
   border-radius: 2px;
