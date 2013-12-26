@@ -1,11 +1,12 @@
 - active_nav_item :catalogue
 - @page_title = 'Catalogue'
 .categories
-  %ul
-    - for category in @product_categories
-      %li
-        %div.img{:style => category.image ? "background-image:url(#{category.image.path})" : 'background-color:#efefef'}
-        .space
-          %h4= link_to category.name, products_path(category.permalink)
-          %p= category.description
+- for category in @product_categories
+  .row
+    .col-md-3
+      = link_to products_path(category.permalink) do
+        = image_tag category.image.path, style: 'width: 100%'
+    .col-md-9
+      %h4= link_to category.name, products_path(category.permalink)
+      %p= category.description
       

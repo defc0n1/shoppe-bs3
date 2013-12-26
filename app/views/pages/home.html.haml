@@ -7,4 +7,5 @@
     %h2 
       Introducing our featured products
       %small= link_to "or browse our entire catalogue", catalogue_path
+    %hr
     = render 'shared/product_list', :products => @products.includes(:default_image)
