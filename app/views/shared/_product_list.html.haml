@@ -2,7 +2,8 @@
   .col-md-6
     .row
       .col-md-3
-        = image_tag product.default_image.path, width: '100px'
+        = link_to product_path(product.product_category.permalink, product.permalink) do
+          = image_tag product.default_image.path, width: '100px'
       .col-md-9
         %h4= link_to product.name, product_path(product.product_category.permalink, product.permalink)
         %p.info= truncate product.short_description, :length => 90
