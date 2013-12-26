@@ -1,28 +1,50 @@
 //= require bootstrap
 //= require bootstrap-theme
 
-@font-face {
-  font-family: 'Glyphicons Halflings';
-  src: url('/assets/glyphicons-halflings-regular.eot');
-  src: url('/assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), 
-       url('/assets/glyphicons-halflings-regular.woff') format('woff'), 
-       url('/assets/glyphicons-halflings-regular.ttf') format('truetype'), 
-       url('/assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+div.field_with_error { 
+	display:inline;
 }
-
+div#flash-notice { 
+	background:#33a174; 
+	color:#fff; 
+	text-align:center; 
+	padding:8px; 
+	font-size:0.9em; 
+	font-weight:bold;
+	p {
+		margin: 0px;
+	}
+}
+div#flash-alert { 
+	background:#a13361; 
+	color:#fff; 
+	text-align:center; 
+	padding:8px; 
+	font-size:0.9em; 
+	font-weight:bold;
+	p {
+		margin: 0px;
+	}
+}
 .demo {
 	width: 100%;
 	background:#1476ba;
 	color:#fff;
 	border-bottom:1px solid #0c588e;
 	font-size:0.8em;
-	.inner {
-		background:image-url('shoppe/logo.svg') no-repeat 0 14px;
+	.container {
+		background:image-url('shoppe/logo.svg') no-repeat 15px 8px;
 		background-size:24px;
-		padding:15px 0;
-		p { margin-left:34px;}
+		padding-top:10px;
+		p { 
+			margin-left:34px;
+			a {
+				color: #fff;
+				text-decoration: underline;
+			}
+		}
 		ul.links {
-			float:right;
+			list-style-type: none;
 			li {
 				float:left;
 				margin-left:15px;
@@ -31,6 +53,7 @@
 					text-decoration:none;
 					padding:3px 10px;
 					border-radius:4px;
+					color: #fff;
 				}
 			}
 		}
@@ -49,6 +72,26 @@
 	color: #ffffff;
 	padding: 20px 20px 10px 20px;
 	margin-bottom: 15px;
+}
+footer {
+	background: #112326;
+	color: #848484;
+	padding-top: 20px;
+	padding-bottom: 15px;
+	.no-circle {
+		list-style-type: none;
+		line-height: 24px;
+		text-decoration: underline;
+		a {
+			color: #848484;
+		}
+	}
+	.h1 {
+		color: #fff;
+	}
+	.copyright {
+		font-size: 0.9em;
+	}
 }
 .errorExplanation {
   border-radius: 2px;

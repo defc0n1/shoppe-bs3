@@ -10,6 +10,12 @@
     = csrf_meta_tags
     = yield :head
   %body
+    %div.demo
+      .container
+        %ul.links.pull-right
+          %li= link_to "Play with Shoppe Admin", "/shoppe"
+          %li= link_to "Browse the code", "http://github.com/tryshoppe/core"
+        %p This is a demo store built with #{link_to 'Shoppe', 'http://tryshoppe.com'} - an open source e-commerce platform for Rails.
     .navbar.navbar-inverse.navbar-static-top{role: "navigation"}
       .container
         .navbar-header
@@ -41,10 +47,9 @@
           %h1
             Welcome to our 
             %em shoppe
-          %img{src: 'http://placehold.it/200x150&text=[foreground img]', class: 'pull-right'}
           %p Check out our lovely products on this page and then you can buy them through the website with just a few clicks using our supremely simple ordering system.
           %p
-            %a.btn.btn-primary.btn-lg{href: "#", role: "button"} Go Shopping!
+            = link_to 'Go Shopping!', catalogue_path, class: 'btn btn-primary btn-lg'
       .home-bar
         .container
           .row
@@ -66,11 +71,12 @@
           - else
             = render 'shared/basket'
             = render 'shared/reasons'
-      %hr
-      %footer
+    
+    %footer
+      .container
         .row
           .col-md-3
-            %ul
+            %ul.no-circle
               %li= link_to "Terms & Conditions", page_path(:terms)
               %li= link_to "Privacy policy", page_path(:privacy)
               %li= link_to "Returns policy", page_path(:returns)
@@ -78,7 +84,7 @@
               %li= link_to "Cookie policy", page_path(:cookies)
           .col-md-4
             %p Got any questions? Call us today:
-            %p.number 01202 901 101
+            %p.h1 01202 901 101
             %p We're open 9am to 5pm, Monday to Friday.
           .col-md-5
             .copyright
