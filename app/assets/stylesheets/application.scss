@@ -1,0 +1,106 @@
+//= require foundation
+//= require reset
+
+html { background:#112326; }
+body { -webkit-font-smoothing:antialiased}
+div.field_with_error { display:inline;}
+div#flash-notice { background:#33a174; color:#fff; text-align:center; padding:8px; font-size:0.9em; font-weight:bold;}
+div#flash-alert { background:#a13361; color:#fff; text-align:center; padding:8px; font-size:0.9em; font-weight:bold;}
+table {width: 100%;}
+.demo {
+	width: 100%;
+	background:#1476ba;
+	color:#fff;
+	border-bottom:1px solid #0c588e;
+	font-size:0.8em;
+	.inner {
+		background:image-url('shoppe/logo.svg') no-repeat 0 14px;
+		background-size:24px;
+		padding:15px 0;
+		p { margin-left:34px;}
+		ul.links {
+			float:right;
+			li {
+				float:left;
+				margin-left:15px;
+				a {
+					background:rgba(255,255,255,0.2);
+					text-decoration:none;
+					padding:3px 10px;
+					border-radius:4px;
+				}
+			}
+		}
+	}
+}
+.contain-to-grid {
+	border-bottom: 1px solid #c2eaee;
+}
+.container {
+	background: #fff; 
+	font-size:90%;
+	.content {
+		padding-top:20px;
+	}
+}
+.home-canvas {
+	background: url("header.jpg") no-repeat scroll center center rgba(0, 0, 0, 0); 
+	width: 100%;
+	min-height: 250px;
+	padding-top:20px;
+	color: #eeeeee;
+	h1 {
+		color: #dddddd;
+		font-size: 2.5rem;
+	}
+}
+.home-bar {
+	width: 100%;
+	background: #174f55;
+	height: 50px;
+	color: #ffffff;
+	padding-top:10px;
+	margin-bottom: 20px;
+}
+.sub-bar {
+	width: 100%;
+	background: #c2eaee;
+	color: #ffffff;
+	padding-top:10px;
+	margin-bottom: 20px;
+}
+#order_separate_delivery_address {
+	margin-bottom: 0px;
+}
+.footer {
+	background: #112326;
+	padding:25px 0;
+	font-size: 0.9rem;
+	color: #fff;
+	a {
+		color: #97AEB2;
+	}
+	.number {
+		font-size: 2rem;
+	}
+	.copyright {
+		font-size:0.8rem;
+	}
+}
+
+/* 
+  custom overrides for foundation (for some reason certain components of the framework aren't loading)
+  really bad hack, but it'll do for now 
+*/
+
+h1 {font-size: 1.75rem;}
+h2 {font-size: 1.5rem;}
+h3 {font-size: 1.35rem;}
+h4 {font-size: 1.2rem;}
+h5 {font-size: 1.1rem;}
+h6 {font-size: 1rem;}
+h1, h2, h3, h4, h5, h6 {margin: 10px 0;}
+
+label {margin-bottom:5px;}
+
+table {border: 1px solid #dddddd;}
