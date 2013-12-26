@@ -46,7 +46,21 @@
 	background: #174f55;
 	color: #ffffff;
 	padding: 20px 20px 10px 20px;
+	margin-bottom: 15px;
 }
 .page-header {
 	margin-top: 70px;
+}
+.errorExplanation {
+  border-radius: 2px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #FDF2F2;
+  border-color: #F29797;
+  color: #A81515;
+  border: 1px solid red;
+}
+.errorExplanation h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
 }

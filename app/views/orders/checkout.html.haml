@@ -2,79 +2,86 @@
 = render 'checkout_sidebar'
     
 .checkout
-  %p.right Secure connection
-  %h2 Place your order
-  %hr
   %p
     Fantastic! You're ready to place your order, just follow the instructions below and
     we'll get your products shipped to you as quickly as we can.
 
-  %h3 Review the products in your shopping bag
-  = render 'shared/order_items', :order => @order
+  %h3 Review your Shopping Bag
+  = render 'shared/order_items', order: @order
 
   - unless @order.delivery_required? && @order.delivery_service.nil?
-    %hr
-    %h3 Complete your details below to complete your order
-    = form_for @order, :url => checkout_path, :html => {:class => 'checkout disableable'} do |f|
+    %h3 Your Details
+    = form_for @order, url: checkout_path, html: {class: 'checkout disableable'} do |f|
       = f.error_messages
       .row
-        .large-12.columns
+        .col-md-12
           = field_set_tag do
             .row
-              .large-3.columns
-                = f.label :first_name, "First Name", :class => 'req'
-                = f.text_field :first_name, :placeholder => 'First Name'
-              .large-3.columns
-                = f.label :last_name, "Surname", :class => 'req'
-                = f.text_field :last_name, :placeholder => 'Last Name'
-              .large-6.columns
-                = f.label :company, "Company Name (optional)"
-                = f.text_field :company
-            .row
-              .large-6.columns
-                = f.label :email_address, 'Your E-Mail Address', :class => 'req'
-                = f.text_field :email_address
-              .large-6.columns
-                = f.label :phone_number, 'Contact Phone Number', :class => 'req'
-                = f.text_field :phone_number
+              .col-md-3
+                = f.label :first_name, 'First Name'
+                = f.text_field :first_name, placeholder: 'First Name', class: 'req form-control'
+              .col-md-3
+                = f.label :last_name, 'Surname'
+                = f.text_field :last_name, placeholder: 'Last Name', class: 'req form-control'
+              .col-md-6
+                = f.label :company, "Company Name"
+                = f.text_field :company, placeholder: '(optional)', class: 'form-control'
+            .row{style: 'margin-top:10px'}
+              .col-md-6
+                = f.label :email_address, 'Your E-Mail Address'
+                = f.text_field :email_address, class: 'req form-control'
+              .col-md-6
+                = f.label :phone_number, 'Contact Phone Number'
+                = f.text_field :phone_number, class: 'req form-control'
       %hr
       .row
-        .large-12.columns
+        .col-md-12
           = field_set_tag do
             %h3 Billing Address
             .row
-              .large-6.columns
-                = f.text_field :billing_address1, :placeholder => "Line 1"
-              .large-3.columns
-                = f.text_field :billing_address3, :placeholder => "Town/City"
-              .large-3.columns
-                = f.text_field :billing_address4, :placeholder => "County"
-            .row
-              .large-4.columns
-                = f.text_field :billing_postcode, :placeholder => "Postcode", :class => 'postcode'
-              .large-8.columns
-                = f.collection_select :billing_country_id, Shoppe::Country.ordered, :id, :name
-            .row
-              .large-12.columns
+              .col-md-7
+                = label_tag 'Line 1', nil, class: 'sr-only'
+                = f.text_field :billing_address1, placeholder: 'Line 1', class: 'req form-control'
+              .col-md-5
+                = label_tag 'Town/City', nil, class: 'sr-only'
+                = f.text_field :billing_address3, placeholder: 'Town/City', class: 'req form-control'
+            .row{style: 'margin-top:10px;'}
+              .col-md-4
+                = label_tag 'County', nil, class: 'sr-only'
+                = f.text_field :billing_address4, placeholder: 'County', class: 'req form-control'
+              .col-md-3
+                = label_tag 'Postcode', nil, class: 'sr-only'
+                = f.text_field :billing_postcode, placeholder: 'Postcode', class: 'postcode form-control'
+              .col-md-5
+                = label_tag 'Country', nil, class: 'sr-only'
+                = f.collection_select :billing_country_id, Shoppe::Country.ordered, :id, :name, {}, { class: 'form-control' }
+            .row{style: 'margin-top:10px;'}
+              .col-md-12
                 = f.check_box :separate_delivery_address
-                = f.label :separate_delivery_address, "Deliver to a different address?"
+                = f.label :separate_delivery_address, 'Deliver to a different address?'
             .delivery
               %hr
-              %h3 Delivery Address
-              .row
-                .large-6.columns
-                  = f.text_field :delivery_address1, :placeholder => "Line 1"
-                .large-3.columns
-                  = f.text_field :delivery_address3, :placeholder => "Town/City"
-                .large-3.columns
-                  = f.text_field :delivery_address4, :placeholder => "County"
-              .row
-                .large-4.columns
-                  = f.text_field :delivery_postcode, :placeholder => "Postcode", :class => 'postcode'
-                .large-8.columns
-                  = f.collection_select :delivery_country_id, Shoppe::Country.ordered, :id, :name
+              %h3 
+                Delivery Address
+                %small (if different to Billing)
+              .row{style: 'margin-top:10px;'}
+                .col-md-7
+                  = label_tag 'Line 1', nil, class: 'sr-only'
+                  = f.text_field :delivery_address1, placeholder: 'Line 1', class: 'form-control'
+                .col-md-5
+                  = label_tag 'Town/City', nil, class: 'sr-only'
+                  = f.text_field :delivery_address3, placeholder: 'Town/City', class: 'form-control'
+              .row{style: 'margin-top:10px;'}
+                .col-md-4
+                  = label_tag 'County', nil, class: 'sr-only'
+                  = f.text_field :delivery_address4, placeholder: 'County', class: 'form-control'
+                .col-md-3
+                  = label_tag 'Postcode', nil, class: 'sr-only'
+                  = f.text_field :delivery_postcode, placeholder: 'Postcode', class: 'postcode form-control'
+                .col-md-5
+                  = f.collection_select :delivery_country_id, Shoppe::Country.ordered, :id, :name, {}, { class: 'form-control' }
 
       %hr
-      = f.submit "Continue to payment", class: 'success button right'
+      = f.submit "Continue to Payment", class: 'btn btn-lg btn-success pull-right'
   - else
     %p Please call us to place this order.

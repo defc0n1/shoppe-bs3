@@ -1,11 +1,14 @@
 - @page_title = 'Checkout'
 = render 'checkout_sidebar'
 .checkout
-  %h2 Confirm order details
-  %p.intro
-    Brilliant! We have everything we need to place the order. Check the items below carefully,
+  %p
+    %strong Final Step: Confirm order details. 
+    We now have everything we need to place the order. Check the items below carefully,
     and if you're happy click 'Place Order' to submit the order.
-  %hr
   = render 'shared/order_items', :order => current_order, :readonly => true
-  = form_tag checkout_confirmation_path, :method => :patch, :class => 'disableable' do
-    %p.submit= submit_tag "Place Order", :class => 'order button success right', style: 'margin-top: 15px;'
+  .row
+    .col-md-6
+      = link_to 'Back', :back, class: 'btn btn-default'
+    .col-md-6
+      = form_tag checkout_confirmation_path, :method => :patch, :class => 'disableable' do
+        = submit_tag "Confirm & Place Order", :class => 'order btn btn-success btn-lg pull-right'

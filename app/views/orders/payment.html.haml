@@ -1,34 +1,38 @@
 - @page_title = 'Checkout'
 = render 'orders/checkout_sidebar'
-
 = shoppe_stripe_javascript
 
 .checkout
-  %p.right Secure connection
-  %h2 Pay using your credit/debit card
-  %hr
   = form_for @order, :url => checkout_payment_path, :html => {:class => 'checkout disableable'} do |f|
     = field_set_tag nil, :class => 'payment' do
-      .panel.radius.callout
-        .row
-          .small-4.columns
-            %label.right.inline{for: "right-label"}= label_tag 'card_number', "Full Card Number"
-          .small-8.columns
-            #right-label= text_field_tag 'card_number', '', :name => nil
-        .row
-          .small-4.columns
-            %label.right.inline{for: "right-label"}= label_tag 'exp_month', "Expiry Date (mm/yyyy)"
-          .small-2.columns
-            #right-label
-              = select_tag nil, options_for_select((1..12).to_a), class: ''
-          .small-2.columns.end
-            #right-label
-              = select_tag nil, options_for_select((Date.today.year..Date.today.year + 10).to_a), :class => 'year'
-        .row
-          .small-4.columns
-            %label.right.inline{for: "right-label"}= label_tag 'cvv2', "Security Code"
-          .small-2.columns
-            #right-label= text_field_tag 'cvc', '', :name => nil, :maxlength => 4
-          .small-6.columns
-            This is the 3 digit number on the back of your card.
-      %p.submit= f.submit "Review your order", :class => 'review button success right'
+      .panel.panel-info
+        .panel-heading
+          %strong Pay using your credit/debit card
+        .panel-body
+          .row
+            .col-md-3.col-md-offset-1
+              %label.right.inline{for: "right-label"}= label_tag 'card_number', 'Full Card Number'
+            .col-md-5
+              #right-label= text_field_tag 'card_number', '', name: nil, class: 'form-control'
+          .row{style: 'margin-top: 10px;'}
+            .col-md-3.col-md-offset-1
+              %label.right.inline{for: "right-label"}= label_tag 'exp_month', 'Expiry Date (mm/yyyy)'
+            .col-md-2
+              #right-label
+                = select_tag nil, options_for_select((1..12).to_a), class: 'form-control'
+            .col-md-2
+              #right-label
+                = select_tag nil, options_for_select((Date.today.year..Date.today.year + 10).to_a), class: 'year form-control'
+          .row{style: 'margin-top: 10px;'}
+            .col-md-3.col-md-offset-1
+              %label.right.inline{for: "right-label"}= label_tag 'cvv2', "Security Code"
+            .col-md-2
+              #right-label= text_field_tag 'cvc', '', name: nil, maxlength: 4, class: 'form-control'
+            .col-md-6
+              This is the 3 digit number on the back of your card.
+          %hr
+          .row
+            .col-md-6
+              = link_to 'Back', :back, class: 'btn btn-default'
+            .col-md-6
+              = f.submit 'Submit Card Details', :class => 'review btn btn-success btn-lg pull-right'

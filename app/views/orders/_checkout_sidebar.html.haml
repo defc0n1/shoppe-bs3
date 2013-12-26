@@ -1,9 +1,25 @@
 = content_for :sidebar do
-  .panel.callout.radius
-    %dl
-      %dt Are my card details safe?
-      %dd Yes! This site is hosted using industry-standard encryption & we don't store your card details on our servers.
-      %dt How long will my order take to arrive?
-      %dd This will depend on what delivery method you select opposite. If ordered before 4pm, all orders are despatched the same day.
-      %dt What payment methods do you accept?
-      %dd We accept Visa, Mastercard & American Express credit/debit cards.
+
+  .panel.panel-warning
+    .panel-heading
+      %strong Secure Connection Verified
+    .panel-body
+      This page is encrypted via SSL. We take card processing and security seriously.
+      = link_to '#ssl-modal', "data-toggle" => "modal" do
+        Find out more.
+
+  .panel.panel-success
+    .panel-heading
+      %strong Frequent Questions
+    .panel-body
+      %strong Are my card details safe?
+      %br
+      Yes! This site is hosted using industry-standard encryption & we don't store your card details on our servers.
+      %hr
+      %strong When will my order arrive?
+      %br
+      This will depend on what delivery method you select opposite. If ordered before 4pm, all orders are despatched the same day.
+      %hr
+      %strong What payment do you accept?
+      %br
+      We accept Visa, Mastercard & American Express credit/debit cards.
