@@ -105,15 +105,13 @@ class OrdersController < ApplicationController
     if request.patch?
       begin
         current_order.confirm!
+
         # This payment method should usually be called in a payment module or elsewhere but for the demo
         # we are adding a payment to the order straight away.
         current_order.payments.create(:method => "Credit Card", :amount => current_order.total, :reference => rand(10000) + 10000, :refundable => true)
+
         session[:order_id] = nil
         redirect_to root_path, :notice => "Order has been placed!"
-
-        # Fire off to Xero and create invoice (marked as paid)
-        # TODO
-
       rescue Shoppe::Errors::PaymentDeclined => e
         flash[:alert] = "Payment was declined by the bank. #{e.message}"
         redirect_to checkout_path
@@ -122,33 +120,6 @@ class OrdersController < ApplicationController
         redirect_to checkout_path
       end
     end
-  end
-
-  #TODO: All of below
-
-  def create_payment_in_xero
-    payment = @client.Payment.build invoice: {id: @invoice.id},
-                                    account: {code: 100},
-                                    date: Date.today,
-                                    amount: @invoice.amount_due,
-                                    reference: "Invoice #{@invoice.id}"
-    payment.save
-  end
-
-  def download_invoice_from_xero
-    invoice = @client.Invoice.find(params[:id])
-    send_data invoice.pdf, type: "application/pdf", filename: "Invoice #{invoice.invoice_number}"
-  end
-
-  def complete_purchase
-    @invoice = @client.Invoice.find(params[:id])
-    create_stripe_customer if !current_registry.has_stripe? and params[:auto_charge]
-    update_customer_credit_card if current_registry.has_stripe? and params[:auto_charge]
-    payment_details = {amount: (@invoice.amount_due * 100).to_i, currency: "gbp", description: "Pay for invoice #{@invoice.invoice_number}"}
-    payment_details.merge! params[:auto_charge] ? { customer: current_registry.stripe_customer_id } : { card: params[:stripe_card_token] }
-
-    @response = Stripe::Charge.create payment_details
-    @xero_response = create_payment_in_xero if @response['paid']
   end
     
 end
