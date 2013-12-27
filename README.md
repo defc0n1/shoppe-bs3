@@ -1,4 +1,7 @@
-This is a template for the [Shoppe](http://github.com/tryshoppe/core) engine (Rails 4) built on the Bootstrap 3 framework. It's currently a proof of concept, has various css hacks and has been created as a base for our own designs.
+This is a template for the [Shoppe](http://github.com/tryshoppe/core) engine (Rails 4) built on the Bootstrap 3 framework. Still **very early stages** but provides the basis for future dev.
+
+## See it in action
+http://shoppe-bs3.herokuapp.com
 
 The Bootstrap frontend framework was used to provide a base template that fits in with our own development. The template closely mimics Adam Cooke's excellent example-store template.
 
@@ -14,8 +17,8 @@ To get started using the example store provided here is simple. Just follow the 
 below and you'll be up and running in minutes with a demo store with demo data.
 
 ```
-$ git clone git://github.com/oceanshq/shoppe-zurbf5.git
-$ cd shoppe-zurbf5
+$ git clone git://github.com/oceanshq/shoppe-bs3.git
+$ cd shoppe-bs3
 
 $ cp config/database.example.yml config/database.yml
 # -> Add the appropriate database configuration to database.yml
@@ -30,8 +33,7 @@ A few notes about this demo store:
 * The store does not currently implement any payment integration. It will ask
   for card details during checkout but these will not be checked (or submitted).
 
-* The design remains copyright Niftyware Limited. Please do not use the design
-  wholesale for any sites you may be developing (hence one of the primary reasons for creating the Bootstrap 3 version)
+* The original design (https://github.com/tryshoppe/example-store) is copyright Niftyware Limited, hence one of the primary reasons for creating the Bootstrap 3 version. Feel free to fork and amend as you see fit.
 
 * Once up and running, you can access the Shoppe interface at `/shoppe` and use 
   **admin@example.com** and **password** to login.
