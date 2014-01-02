@@ -1,5 +1,5 @@
-//= require bootstrap
-//= require bootstrap-theme
+@import "bootstrap";
+@import "bootstrap/theme";
 
 div.field_with_error { 
 	display:inline;
