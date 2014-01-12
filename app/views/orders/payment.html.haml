@@ -5,6 +5,12 @@
 .checkout
   = form_for @order, :url => checkout_payment_path, :html => {:class => 'stripeForm checkout disableable'} do |f|
     = hidden_field_tag 'stripe_token', nil, "data-stripe" => "token"
+    = hidden_field_tag 'name', @order.full_name, "data-stripe" => "name"
+    = hidden_field_tag 'address_line1', @order.billing_address1, "data-stripe" => "address_line1"
+    = hidden_field_tag 'address_city', @order.billing_address3, "data-stripe" => "address_city"
+    = hidden_field_tag 'address_state', @order.billing_address4, "data-stripe" => "address_state"
+    = hidden_field_tag 'address_zip', @order.billing_postcode, "data-stripe" => "address_zip"
+    = hidden_field_tag 'address_country', @order.billing_country.try(:name), "data-stripe" => "address_country"
     = field_set_tag nil, :class => 'payment' do
       .panel.panel-info
         .panel-heading
